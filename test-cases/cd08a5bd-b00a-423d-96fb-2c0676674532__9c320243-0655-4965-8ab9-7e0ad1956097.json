@@ -1,0 +1,102 @@
+{
+  "id": "9c320243-0655-4965-8ab9-7e0ad1956097",
+  "testPlanId": "cd08a5bd-b00a-423d-96fb-2c0676674532",
+  "requirementId": "ad602e65-391d-40c1-ae6f-77a286abdd24",
+  "suiteName": "Shopping Cart — Add $10.90 Product and Validate Cart (E2E)",
+  "case": {
+    "id": "9c320243-0655-4965-8ab9-7e0ad1956097",
+    "title": "Verify cart persistence and badge after closing and reopening cart",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Shopping Cart app",
+        "value": "https://react-shopping-cart-67954.firebaseapp.com/"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Product grid is visible",
+        "locatorHint": "css=.products"
+      },
+      {
+        "id": "s3",
+        "action": "assertContainsText",
+        "targetDescription": "Confirm $10.90 price is present in product grid",
+        "locatorHint": "css=.products",
+        "assertion": "$10.90"
+      },
+      {
+        "id": "s4",
+        "action": "tap",
+        "targetDescription": "Tap 'Add to cart' on the product priced $10.90",
+        "locatorHint": "product card containing price \"$10.90\" -> button text: Add to cart"
+      },
+      {
+        "id": "s5",
+        "action": "waitForVisible",
+        "targetDescription": "Cart drawer auto-opens after adding",
+        "locatorHint": "css=.float-cart__content"
+      },
+      {
+        "id": "s6",
+        "action": "assertCount",
+        "targetDescription": "Cart contains exactly one line item",
+        "locatorHint": "css=.float-cart .shelf-item"
+      },
+      {
+        "id": "s7",
+        "action": "tap",
+        "targetDescription": "Close cart drawer",
+        "locatorHint": "css=.float-cart__toggle"
+      },
+      {
+        "id": "s8",
+        "action": "assertContainsText",
+        "targetDescription": "Cart badge shows 1 after closing drawer",
+        "locatorHint": "css=.bag__quantity",
+        "assertion": "1"
+      },
+      {
+        "id": "s9",
+        "action": "tap",
+        "targetDescription": "Reopen cart drawer",
+        "locatorHint": "css=.float-cart__toggle"
+      },
+      {
+        "id": "s10",
+        "action": "waitForVisible",
+        "targetDescription": "Cart drawer is visible again",
+        "locatorHint": "css=.float-cart__content"
+      },
+      {
+        "id": "s11",
+        "action": "assertCount",
+        "targetDescription": "Cart still contains exactly one line item",
+        "locatorHint": "css=.float-cart .shelf-item"
+      },
+      {
+        "id": "s12",
+        "action": "assertContainsText",
+        "targetDescription": "Subtotal remains $10.90",
+        "locatorHint": "css=.float-cart .sub-price__val",
+        "assertion": "$10.90"
+      },
+      {
+        "id": "s13",
+        "action": "assertEnabled",
+        "targetDescription": "Checkout button remains enabled",
+        "locatorHint": "css=.float-cart .buy-btn"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}

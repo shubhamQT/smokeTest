@@ -1,0 +1,71 @@
+{
+  "id": "3803ad5b-c962-4a41-8daf-42f85fcd9f44",
+  "testPlanId": "cd08a5bd-b00a-423d-96fb-2c0676674532",
+  "requirementId": "ad602e65-391d-40c1-ae6f-77a286abdd24",
+  "suiteName": "Shopping Cart — Add $10.90 Product and Validate Cart (E2E)",
+  "case": {
+    "id": "3803ad5b-c962-4a41-8daf-42f85fcd9f44",
+    "title": "View product catalog and verify empty cart on initial load",
+    "priority": "P1",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "s1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to Shopping Cart app",
+        "value": "https://react-shopping-cart-67954.firebaseapp.com/"
+      },
+      {
+        "id": "s2",
+        "action": "waitForVisible",
+        "targetDescription": "Product grid is visible",
+        "locatorHint": "css=.products"
+      },
+      {
+        "id": "s3",
+        "action": "assertContainsText",
+        "targetDescription": "Product priced $10.90 is visible in listing",
+        "locatorHint": "css=.products",
+        "assertion": "$10.90"
+      },
+      {
+        "id": "s4",
+        "action": "assertVisible",
+        "targetDescription": "Shopping cart toggle/icon is visible on right",
+        "locatorHint": "css=.float-cart__toggle"
+      },
+      {
+        "id": "s5",
+        "action": "tap",
+        "targetDescription": "Open cart drawer",
+        "locatorHint": "css=.float-cart__toggle"
+      },
+      {
+        "id": "s6",
+        "action": "waitForVisible",
+        "targetDescription": "Cart drawer content becomes visible",
+        "locatorHint": "css=.float-cart__content"
+      },
+      {
+        "id": "s7",
+        "action": "assertContainsText",
+        "targetDescription": "Cart subtotal shows $0.00 when empty",
+        "locatorHint": "css=.float-cart .sub-price__val",
+        "assertion": "$0.00"
+      },
+      {
+        "id": "s8",
+        "action": "tap",
+        "targetDescription": "Close cart drawer",
+        "locatorHint": "css=.float-cart__toggle"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}
